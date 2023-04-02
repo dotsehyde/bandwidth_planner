@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandwidth Planner</title>
+    <link rel="stylesheet" href="./public/css/pico.min.css">
+</head>
+<body>
+    <main class="container">
+        <h1 style="text-align: center;">Hidden Markov Model Bandwidth Planner For ODeL</h1>
+        <form action="./get-predict" method="get">
+            <input type="submit" value="Predict"/>
+        </form>
+        <form action="./get-plan" method="get">
+            <div class="grid">
+        <input type="number" id="bandwidth" name="bandwidth" placeholder="Bandwidth Budget" required>
+      <input <% if(predData.length<1){ %>disabled<% } %>  type="submit" value="Plan"/>
+    </div>
+        </form>
+      
+        <% if(predData.length>0){ %>
+         <table>
+            <thead>
+                <tr>
+                    <th>Bandwidth Budget</th>
+                    <th>Schedule</th>
+                    <th>Course resource download</th>
+                    <th>Registration</th>
+                    <th>Submitting Assignments</th>
+                    <th>Video Conferencing</th>
+                    <th>Online Exams</th>
+                    <th>E-Tutoring</th>
+                    <th>Total</th>    
+                </tr>
+            </thead>
+            <tbody style="text-align: center;" id="table-body">
+                <% for(var i=0;i<predData.length;i++){ %>
+                    <tr>
+                        <td>
+                            <%if(planData[i] !== undefined){%>   <%= planData[i].bandwidth%><%}%>
+                   </td>
+       <td>
+        Predicted<br/>
+        <%if(planData[i] !== undefined){%> %Planned<%}%>
+   </td>
+   <td>
+    <%= predData[i].course_download%><br/>
+    <%if(planData[i] !== undefined){%> <%= planData[i].course_download%><%}%>
+</td>
+<td>
+    <%= predData[i].registration%><br/>
+    <%if(planData[i] !== undefined){%> <%= planData[i].registration%><%}%>
+</td>
+<td>
+    <%= predData[i].submit_assign%><br/>
+    <%if(planData[i] !== undefined){%><%= planData[i].submit_assign%><%}%>
+</td>
+<td>
+    <%= predData[i].video%><br/>
+    <%if(planData[i] !== undefined){%><%= planData[i].video%><%}%>
+</td>
+<td>
+    <%= predData[i].online_exam%><br/>
+    <%if(planData[i] !== undefined){%> <%= planData[i].online_exam%><%}%>
+</td>
+<td>
+    <%= predData[i].tutoring%><br/>
+    <%if(planData[i] !== undefined){%> <%= planData[i].tutoring%><%}%>
+</td>
+<td>
+    <%= predData[i].total%><br/>
+    <%if(planData[i] !== undefined){%> <%= planData[i].total%><%}%>
+</td>
+
+           </tr>
+                <% } %>
+        </tbody>
+         
+         </table>
+            <% } else{%> 
+                <p style="text-align: center;">No data yet!</p> 
+                <% } %> 
+    </main>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    // window.addEventListener('beforeunload', function (e) {
+    //     alert("Called");
+    //         e.preventDefault();
+    //         $.get('/destroy');      
+    //     });
+
+</script>
+</html>
